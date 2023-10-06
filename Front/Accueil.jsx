@@ -1,6 +1,5 @@
 import { Text, View, Button, StyleSheet, TouchableOpacity, ScrollView, TextInput, Image, FlatList } from "react-native"
 import React, { useEffect, useState } from 'react';
-import Navbar from '../Composants/NavBar';
 import db from "../config"
 import { deleteDoc , doc , getDocs, collection } from "firebase/firestore"
 
@@ -41,7 +40,6 @@ function Accueil({navigation}) {
 
   return (
     <View>
-      <Navbar/>
       <FlatList 
         data={produits}
         renderItem={function({item}){

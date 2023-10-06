@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Accueil from './Front/Accueil';
 import Produit from './Front/Produit';
 import Profil from './Front/Profil';
+import Navbar from './Composants/NavBar';
 
 export default function App() {
   
@@ -12,6 +13,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <Navbar/>
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen component={Accueil} name="Accueil" />

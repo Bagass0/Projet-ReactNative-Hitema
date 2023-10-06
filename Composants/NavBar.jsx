@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 const Navbar = ({navigation}) => {
@@ -11,7 +10,7 @@ const Navbar = ({navigation}) => {
       <TouchableOpacity style={styles.navItem}  onPress={() => navigation.navigate('Profil')}>
         <Text style={styles.navText}>Profil</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.navItem}  onPress={() => navigation.navigate('Produit')}>
+      <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Produit')}>
         <Text style={styles.navText}>Paramètres</Text>
       </TouchableOpacity>
     </View>
