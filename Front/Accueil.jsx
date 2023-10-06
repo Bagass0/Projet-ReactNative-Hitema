@@ -1,5 +1,6 @@
 import { Text, View, Button, StyleSheet, TouchableOpacity, ScrollView, TextInput, Image, FlatList } from "react-native"
 import React, { useEffect, useState } from 'react';
+import Navbar from '../Composants/NavBar';
 import db from "../config"
 import { deleteDoc , doc , getDocs, collection } from "firebase/firestore"
 
@@ -13,14 +14,12 @@ function Accueil({navigation}) {
     .then(function(snapShot){
       
       const data = [];
-      //console.log(snapShot.docs);
+
 
       snapShot.docs.map(function(doc){ 
-        console.log("ici",doc.data())
         data.push({...doc.data() , id : doc.id}) 
       })
 
-      console.log("la",data)
       setProduits(data);
     })
 
@@ -41,12 +40,13 @@ function Accueil({navigation}) {
   }
 
   return (
-
+    <View>
+      <Navbar/>
       <FlatList 
         data={produits}
         renderItem={function({item}){
         return <View style={styles.card}>
-            <TouchableOpacity onPress={() => navigation.navigate('produit', { id: item.id })}>
+            <TouchableOpacity onPress={() => navigation.navigate('Produit', { id: item.id })}>
               <Image
                 style={styles.cardImage}
                 source={{ uri: item.image , width: 200 , height : 200 }}
@@ -60,6 +60,7 @@ function Accueil({navigation}) {
           </View>
         }}
       />
+    </View>
   );
 }
 
