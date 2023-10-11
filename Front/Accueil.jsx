@@ -1,4 +1,4 @@
-import { Text, View, Button, StyleSheet, TouchableOpacity, ScrollView, TextInput, Image, FlatList } from "react-native"
+import { Text, View, StyleSheet, TouchableOpacity, Image, FlatList, SafeAreaView } from "react-native"
 import React, { useEffect, useState } from 'react';
 import db from "../config"
 import { deleteDoc , doc , getDocs, collection } from "firebase/firestore"
@@ -25,12 +25,12 @@ function Accueil({navigation}) {
 } , [])
 
   return (
-    <View>
+    <SafeAreaView>
       <FlatList 
         data={produits}
         renderItem={function({item}){
         return <View style={styles.card}>
-            <TouchableOpacity onPress={() => navigation.navigate('Produit', { id: item.id, image: item.image, nom: item.nom, description: item.description, auteur: item.auteur} )}>
+            <TouchableOpacity onPress={() => navigation.navigate('Produit', { id: item.id, image: item.image, nom: item.nom, description: item.description, auteur: item.auteur, dt_creation: item.dt_creation} )}>
               <Image
                 style={styles.cardImage}
                 source={{ uri: item.image , width: 200 , height : 200 }}
@@ -43,7 +43,7 @@ function Accueil({navigation}) {
           </View>
         }}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 
