@@ -24,27 +24,13 @@ function Accueil({navigation}) {
 
 } , [])
 
-  const supprimer = (id) => {
-    deleteDoc(doc(db , "etudiant" , id)).then(function(){
-      setUpdateList(!updateList);
-    })
-}
-
-  const handleClickProfil = function(){
-    navigation.navigate("profil")
-  }
-
-  const handleClickConnexion = function(){
-    navigation.navigate("formcreate")
-  }
-
   return (
     <View>
       <FlatList 
         data={produits}
         renderItem={function({item}){
         return <View style={styles.card}>
-            <TouchableOpacity onPress={() => navigation.navigate('Produit', { id: item.id })}>
+            <TouchableOpacity onPress={() => navigation.navigate('Produit', { id: item.id, image: item.image, nom: item.nom, description: item.description, auteur: item.auteur} )}>
               <Image
                 style={styles.cardImage}
                 source={{ uri: item.image , width: 200 , height : 200 }}
@@ -53,7 +39,6 @@ function Accueil({navigation}) {
             </TouchableOpacity>
             <View style={styles.produitInfo}>
               <Text style={styles.produitTitre}>{item.nom}</Text>
-              <Text style={styles.produitPrix}>{item.description}</Text>
             </View>
           </View>
         }}

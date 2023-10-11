@@ -1,17 +1,25 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const Navbar = ({navigation}) => {
+
+const Navbar = () => {
+
+  const navigation = useNavigation();
+
   return (
     <View style={styles.navbar}>
-      <TouchableOpacity style={styles.navItem}  onPress={() => navigation.navigate('Accueil')}>
+      <TouchableOpacity
+        style={styles.navItem}
+        onPress={() => navigation.navigate('Accueil')}
+      >
         <Text style={styles.navText}>Accueil</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.navItem}  onPress={() => navigation.navigate('Profil')}>
+      <TouchableOpacity
+        style={styles.navItem}
+        onPress={() => navigation.navigate('Profil')}
+      >
         <Text style={styles.navText}>Profil</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Produit')}>
-        <Text style={styles.navText}>Paramètres</Text>
       </TouchableOpacity>
     </View>
   );
