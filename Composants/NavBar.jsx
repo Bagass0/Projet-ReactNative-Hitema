@@ -1,9 +1,11 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../Context/AuthContext';
 
 const Navbar = () => {
   const navigation = useNavigation();
+  const { isLoggedIn } = useAuth();
 
   return (
     <View style={styles.navbar}>
@@ -14,12 +16,14 @@ const Navbar = () => {
         <Text style={styles.navText}>Accueil</Text>
       </TouchableOpacity>
 
+      {isLoggedIn ? (
         <TouchableOpacity
           style={styles.navItem}
           onPress={() => navigation.navigate('Profil')}
         >
           <Text style={styles.navText}>Profil</Text>
         </TouchableOpacity>
+      ) : (
 
         <TouchableOpacity
           style={styles.navItem}
@@ -27,6 +31,7 @@ const Navbar = () => {
         >
           <Text style={styles.navText}>Connexion</Text>
         </TouchableOpacity>
+      )}  
     </View>
   );
 };

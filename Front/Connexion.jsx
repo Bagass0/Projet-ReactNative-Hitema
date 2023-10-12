@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { View, TextInput, Button, StyleSheet, Text, SafeAreaView } from 'react-native';
-import db from "../config"
-import { getDocs, collection } from "firebase/firestore"
+import db from "../config";
+import { getDocs, collection } from "firebase/firestore";
+import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '../Context/AuthContext';
 
 const Connexion = () => {
+  const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userData, setUserData] = useState(['']);
+  const { setIsLoggedIn } = useAuth();
 
   useEffect( function(){ 
 
-    getDocs(collection(db, "membres "))
+    getDocs(collection(db, "membres"))
     .then(function(snapShot){
       
       const data = [];
@@ -27,12 +31,13 @@ const Connexion = () => {
 
   const handleLogin = () => {
     if (email && password) {
-      const user = userData.find(user => user.email === email && user.password === password);
-      alert('Connexion réussie !');
+        const user = userData.find(user => user.email === email && user.password === password);
+        setIsLoggedIn(true);
+        navigation.navigate('Accueil')
     } 
-    else {
-      alert('Veuillez saisir un e-mail et un mot de passe.');
-    }
+      else {
+        alert('Veuillez saisir un e-mail et un mot de passe.');
+      }
   };
 
   return (

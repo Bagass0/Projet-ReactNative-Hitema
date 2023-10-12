@@ -8,7 +8,7 @@ function Produit({ route }) {
   }
 
   // Récupérez le paramètre "image" de la navigation
-  const { image, nom, description, auteur, dt_creation } = route.params;
+  const { image, nom, description, auteur } = route.params;
 
   return ( 
     <SafeAreaView style={styles.safeArea}>

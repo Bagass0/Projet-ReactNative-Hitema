@@ -5,7 +5,6 @@ import { getDocs, collection } from "firebase/firestore"
 
 function Accueil({navigation}) {
   const [produits, setProduits] = useState([]);
-  const [updateList , setUpdateList] = useState(false);
 
   useEffect( function(){ 
 
@@ -30,7 +29,7 @@ function Accueil({navigation}) {
         data={produits}
         renderItem={function({item}){
         return <View style={styles.card}>
-            <TouchableOpacity onPress={() => navigation.navigate('Produit', { id: item.id, image: item.image, nom: item.nom, description: item.description, auteur: item.auteur, dt_creation: item.dt_creation} )}>
+            <TouchableOpacity onPress={() => navigation.navigate('Produit', { id: item.id, image: item.image, nom: item.nom, description: item.description, auteur: item.auteur} )}>
               <Image
                 style={styles.cardImage}
                 source={{ uri: item.image , width: 200 , height : 200 }}

@@ -1,6 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { AuthProvider } from './Context/AuthContext';
 import Accueil from './Front/Accueil';
 import Produit from './Front/Produit';
 import Profil from './Front/Profil';
@@ -11,17 +12,19 @@ export default function App() {
   const Stack = createStackNavigator();
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen component={Accueil} name="Accueil" />
-        <Stack.Screen component={Produit} name="Produit" />
-        <Stack.Screen component={Profil} name="Profil" />
-        <Stack.Screen component={Connexion} name="Connexion" />
-      </Stack.Navigator>
-      <View style={styles.container}>
-        <Navbar />
-      </View>
-    </NavigationContainer>
+    <AuthProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen component={Accueil} name="Accueil" />
+          <Stack.Screen component={Produit} name="Produit" />
+          <Stack.Screen component={Profil} name="Profil" />
+          <Stack.Screen component={Connexion} name="Connexion" />
+        </Stack.Navigator>
+        <View style={styles.container}>
+          <Navbar />
+        </View>
+      </NavigationContainer>
+    </AuthProvider>
   );
 }
 
