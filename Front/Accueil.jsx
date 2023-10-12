@@ -1,7 +1,7 @@
 import { Text, View, StyleSheet, TouchableOpacity, Image, FlatList, SafeAreaView } from "react-native"
 import React, { useEffect, useState } from 'react';
 import db from "../config"
-import { deleteDoc , doc , getDocs, collection } from "firebase/firestore"
+import { getDocs, collection } from "firebase/firestore"
 
 function Accueil({navigation}) {
   const [produits, setProduits] = useState([]);

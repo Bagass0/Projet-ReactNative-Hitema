@@ -1,19 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, TextInput, Button, StyleSheet, Text, SafeAreaView } from 'react-native';
+import db from "../config"
+import { getDocs, collection } from "firebase/firestore"
 
 const Connexion = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [userData, setUserData] = useState(['']);
+
+  useEffect( function(){ 
+
+    getDocs(collection(db, "membres "))
+    .then(function(snapShot){
+      
+      const data = [];
+
+
+      snapShot.docs.map(function(doc){ 
+        data.push({...doc.data() , id : doc.id}) 
+      })
+
+      setUserData(data);
+    })
+
+} , [])
 
   const handleLogin = () => {
-    // Ici, vous pouvez ajouter la logique de connexion avec les données de l'utilisateur (email, mot de passe).
-    // Par exemple, vous pouvez envoyer ces données à votre API backend pour l'authentification.
-
-    // Exemple de validation simple
     if (email && password) {
-      console.log('Utilisateur connecté avec :', email, password);
-    } else {
-      console.log('Veuillez saisir un e-mail et un mot de passe.');
+      const user = userData.find(user => user.email === email && user.password === password);
+      alert('Connexion réussie !');
+    } 
+    else {
+      alert('Veuillez saisir un e-mail et un mot de passe.');
     }
   };
 
