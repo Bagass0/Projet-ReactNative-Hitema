@@ -10,7 +10,7 @@ const Connexion = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [userData, setUserData] = useState(['']);
-  const { setIsLoggedIn } = useAuth();
+  const { setIsLoggedIn, updateCurrentUser } = useAuth();
 
   useEffect( function(){ 
 
@@ -29,16 +29,23 @@ const Connexion = () => {
 
 } , [])
 
-  const handleLogin = () => {
-    if (email && password) {
-        const user = userData.find(user => user.email === email && user.password === password);
+const handleLogin = () => {
+  if (email && password) {
+      const user = userData.find(user => user.email === email && user.password === password);
+      if(user) {
         setIsLoggedIn(true);
-        navigation.navigate('Accueil')
-    } 
-      else {
-        alert('Veuillez saisir un e-mail et un mot de passe.');
+        updateCurrentUser(user.id, user.email, user.password, user.role);
+        navigation.navigate('Accueil');
       }
-  };
+      else {
+        alert("Mauvais e-mail ou mot de passe.");
+      }
+  } 
+  else {
+      alert('Veuillez saisir un e-mail et un mot de passe.');
+  }
+};
+
 
   return (
     <SafeAreaView style={styles.container}>

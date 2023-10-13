@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import db from "../config";
-import { getDocs, collection } from "firebase/firestore";
 import { useAuth } from "../Context/AuthContext";
 import { useNavigation } from "@react-navigation/native";
 
 function Profil() {
-  const { isLoggedIn, setIsLoggedIn } = useAuth();
-  const [userData, setUserData] = useState(['']);
+  const { isLoggedIn, setIsLoggedIn, currentUser } = useAuth();
+
   const navigation = useNavigation();
 
   const handleLogout = () => {
@@ -15,59 +13,34 @@ function Profil() {
     navigation.navigate("Accueil");
   };
 
-  useEffect( () => { 
-
-    getDocs(collection(db, "membres"))
-    .then(function(snapShot){
-      
-      const data = [];
-
-
-      snapShot.docs.map(function(doc){ 
-        data.push({...doc.data() , id : doc.id}) 
-      })
-
-      setUserData(data);
-    })
-
-} , [])
-
   return (
-    <View>
-    {
-        isLoggedIn ? 
-        (
-            <View style={styles.container}>
-            {
-                userData.map((user, index) => (
-                <View key={index}>
-                    {
-                        user.role === true ? 
-                        (
-                            <Text key={index}>Vous êtes Administrateur</Text>
-                        ) : 
-                        (
-                            <Text key={index}>Vous êtes Rédacteur</Text>
-                        )
-                    }
-                </View>
-                ) )
-            }
-                <TouchableOpacity style={styles.button} onPress={handleLogout}>
-                    <Text style={styles.buttonText}>Déconnexion</Text>
-                </TouchableOpacity>
-            </View>
-      ) : 
-      (null)
-    }
+    <View style={styles.container}>
+      {isLoggedIn ? (
+        <View>
+          {currentUser.role ? (
+            <Text style={styles.text}>Vous êtes Administrateur</Text>
+          ) : (
+            <Text style={styles.text}>Vous êtes Redacteur</Text>
+          )}
+          <TouchableOpacity style={styles.button} onPress={handleLogout}>
+            <Text style={styles.buttonText}>Déconnexion</Text>
+          </TouchableOpacity>
+        </View>
+      ) : null}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    height: '60%',
-    justifyContent: 'space-between',
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  text: {
+    fontSize: 24,
+    marginBottom: 20,
+    textAlign: "center",
   },
   button: {
     backgroundColor: "#007bff",
@@ -75,7 +48,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     marginTop: 20,
-    alignSelf: "stretch", // Prend toute la largeur disponible
   },
   buttonText: {
     color: "#fff",
