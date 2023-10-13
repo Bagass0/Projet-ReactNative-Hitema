@@ -1,9 +1,11 @@
 import { Text, View, StyleSheet, TouchableOpacity, Image, FlatList, SafeAreaView } from "react-native"
+import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import db from "../config"
 import { getDocs, collection } from "firebase/firestore"
 
-function Accueil({navigation}) {
+function Accueil() {
+  const navigation = useNavigation();
   const [produits, setProduits] = useState([]);
 
   useEffect( function(){ 
@@ -37,7 +39,10 @@ function Accueil({navigation}) {
               />
             </TouchableOpacity>
             <View style={styles.produitInfo}>
-              <Text style={styles.produitTitre}>{item.nom}</Text>
+              <View style={styles.produitInfo2}>
+                <Text style={styles.produitTitre}>{item.nom}</Text>
+                <Text style={styles.produitTitre2}>{item.auteur}</Text>
+              </View>
             </View>
           </View>
         }}
@@ -72,14 +77,22 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: 'white',
   },
+  produitInfo2: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   produitTitre: {
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 5,
+    justifyContent: 'space-around',
   },
-  produitPrix: {
-    fontSize: 14,
+  produitTitre2: {
+    fontSize: 16,
+    fontWeight: 'bold',
     marginBottom: 5,
+    justifyContent: 'space-around',
+    color: '#706f6f',
   },
 });
 

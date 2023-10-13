@@ -39,14 +39,14 @@ const Navbar = () => {
 const styles = StyleSheet.create({
   navbar: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-betwween',
     alignItems: 'center',
     backgroundColor: '#007bff',
   },
   navItem: {
     flex: 1,
     alignItems: 'center',
-    padding: 10,
+    padding: 15,
   },
   navText: {
     color: '#fff',

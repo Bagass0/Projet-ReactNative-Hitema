@@ -7,6 +7,7 @@ import Produit from './Front/Produit';
 import Profil from './Front/Profil';
 import Connexion from './Front/Connexion';
 import Navbar from './Composants/NavBar';
+import Gestion from './Front/Gestion';
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -19,6 +20,7 @@ export default function App() {
           <Stack.Screen component={Produit} name="Produit" />
           <Stack.Screen component={Profil} name="Profil" />
           <Stack.Screen component={Connexion} name="Connexion" />
+          <Stack.Screen component={Gestion} name="Gestion" />
         </Stack.Navigator>
         <View style={styles.container}>
           <Navbar />
